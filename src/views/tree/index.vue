@@ -4,7 +4,7 @@
 
     <el-tree
       ref="tree2"
-      :data="data2"
+      :data="treeData"
       :props="defaultProps"
       :filter-node-method="filterNode"
       class="filter-tree"
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       filterText: '',
-      data2: [{
+      treeData: [{
         id: 1,
         label: 'Level one 1',
         children: [{

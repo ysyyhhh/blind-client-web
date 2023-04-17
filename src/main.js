@@ -1,11 +1,19 @@
 import Vue from 'vue'
 
+import AMap from 'vue-amap'
+// 初始化vue-amap
+AMap.initAMapApiLoader({
+  // 高德key
+  key: 'ef2a5cacb68a466d5594a7162a7bb090',
+  // 插件集合 （插件按需引入）
+  plugin: ['AMap.Geolocation']
+})
+Vue.use(AMap)
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
-
+// import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
 
@@ -35,7 +43,9 @@ if (process.env.NODE_ENV === 'production') {
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
-
+Vue.prototype.clone = function(e) {
+  return JSON.parse(JSON.stringify(e))
+}
 new Vue({
   el: '#app',
   router,
