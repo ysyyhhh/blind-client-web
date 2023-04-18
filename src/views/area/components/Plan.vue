@@ -431,3 +431,26 @@ export default {
 }
 
 </script>
+
+<style lang="scss" scoped>
+
+.left-bar {
+  float: left;
+  width: 66%;
+  height: 100%;
+  position: absolute;
+  overflow: auto;
+  background-color: azure;
+}
+.right-bar {
+  // margin-top: -190px;
+  float: right;
+  right: 0px;
+  width: 33%;
+  height: 100%;
+  position: absolute;
+  overflow: auto;
+  background-color: antiquewhite;
+}
+
+</style>

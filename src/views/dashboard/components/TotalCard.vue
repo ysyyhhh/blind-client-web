@@ -20,13 +20,14 @@
         </div>
         <div style="height:180px"><chart height="100%" width="100%" /></div>
       </div>
-      <div>
-        障碍物趋势
+      <div style="margin-top:10px">
+        <div style="font-size:17px;margin-bottom:5px">障碍物总计</div>
         <div style="height:180px"><bar-chart height="100%" width="100%" /></div>
       </div>
-      <div>
-        障碍物分类
-        <div style="height:200px"><annulus-chart height="100%" width="90%" /></div>
+      <div style="margin-top:10px">
+        <div style="font-size:17px;margin-bottom:5px">   障碍物分类
+        </div>
+        <div style="height:300px"><annulus-chart height="80%" width="100%" /></div>
       </div>
     </div>
   </el-card>
@@ -37,9 +38,9 @@
 
 // import PanThumb from '@/components/PanThumb'
 // import Mallki from '@/components/TextHoverEffect/Mallki'
-import Chart from './MixChart'
-import BarChart from './BarChart'
-import AnnulusChart from './AnnulusChart'
+import Chart from './right/MixChart'
+import BarChart from './right/BarChart'
+import AnnulusChart from './right/AnnulusChart'
 export default {
   name: 'TotalCard',
   components: { Chart, BarChart, AnnulusChart },

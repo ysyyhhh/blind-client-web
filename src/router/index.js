@@ -70,16 +70,31 @@ export const constantRoutes = [
   {
     path: '/home',
     component: Layout,
+    redirect: '/home/index',
     children: [
       {
         path: 'index',
         name: 'home',
         component: () => import('@/views/home/index'),
-        meta: { title: 'home', icon: 'form' }
+        meta: { title: 'home', icon: 'user', noCache: true }
       }
-    ]
-    // hidden: true
+    ],
+    hidden: true
   },
+  // {
+  //   path: '/profile',
+  //   component: Layout,
+  //   redirect: '/profile/index',
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/profile/index'),
+  //       name: 'Profile',
+  //       meta: { title: 'Profile', icon: 'user', noCache: true }
+  //     }
+  //   ]
+  // }
   {
     path: '/area',
     component: Layout,

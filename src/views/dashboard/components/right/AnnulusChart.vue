@@ -38,11 +38,11 @@ export default {
     drawLine() {
       this.myChart = echarts.init(this.$el, 'macarons')
       this.myChart.setOption({
-        title: {
-          text: '障碍物分类', // 主标题
-          subtext: '', // 副标题
-          x: 'left' // x轴方向对齐方式
-        },
+        // title: {
+        //   text: '障碍物分类', // 主标题
+        //   subtext: '', // 副标题
+        //   x: 'left' // x轴方向对齐方式
+        // },
         grid: { containLabel: true },
         tooltip: {
           trigger: 'item',
@@ -65,7 +65,7 @@ export default {
             type: 'pie',
             radius: ['50%', '70%'],
             avoidLabelOverlap: false,
-            center: ['50%', '50%'],
+            center: ['60%', '50%'],
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
