@@ -11,3 +11,13 @@ export function addMessage(data) {
   })
 }
 
+export function getUnReadMessageList() {
+  return request({
+    url: '/service-subscription/user/getUnReadMessageList',
+    method: 'get',
+    headers: {
+      'token': getToken()
+    }
+  })
+}
+

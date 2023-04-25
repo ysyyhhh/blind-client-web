@@ -40,7 +40,7 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-import Message from '@/components/Message'
+import Message from './Message'
 export default {
   components: {
     Breadcrumb,

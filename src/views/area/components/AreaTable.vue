@@ -22,35 +22,36 @@
       border
       fit
       highlight-current-row
-      style="width: 100%;"
+
+      style="width: 100%;text-align:center"
     >
-      <el-table-column label="区域编号" prop="id" align="center" width="80px">
+      <el-table-column label="区域编号" prop="id" align="center" min-width="10%">
         <template slot-scope="{row}">
           <span>{{ row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="区域全称" width="100px" align="center">
+      <el-table-column label="区域全称" align="center" min-width="30%">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.fullName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="行政级别" width="250px">
+      <el-table-column label="行政级别" align="center" min-width="10%">
         <template slot-scope="{row}">
           <span> {{ row.level }}</span>
           <!-- <el-tag>{{ row.location }}</el-tag> -->
         </template>
       </el-table-column>
-      <el-table-column label="检测总数" width="100px" align="center">
+      <el-table-column label="检测总数" min-width="10%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.obstacleCount }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="待处理总数" width="80px">
+      <el-table-column label="待处理总数" min-width="10%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.unprocessedObstacleCount }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="订阅情况" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="订阅情况" align="center" min-width="10%" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button v-if="row.isSubscribed!=1" size="mini" type="success" @click="handleModifyStatus(row,1)">
             订阅

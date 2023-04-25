@@ -37,7 +37,7 @@ export default {
   methods: {
     async submit() {
       console.log(this.form)
-      if (this.newPassword !== this.newPasswordAgain) {
+      if (this.form.newPassword !== this.form.newPasswordAgain) {
         this.$message({
           message: 'Twice password is not the same',
           type: 'error',

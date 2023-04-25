@@ -3,7 +3,7 @@
     <div class="filter-container">
       <!-- <el-input v-model="listQuery.title" placeholder="Title" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" /> -->
 
-      <el-input v-model="listQuery.search" placeholder="用户名/手机号/姓名" style="width: 130px;" class="filter-item" />
+      <el-input v-model="listQuery.search" placeholder="用户名/手机号/姓名" style="width: 230px;" class="filter-item" />
 
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
@@ -26,35 +26,35 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column label="ID" prop="id" align="center" width="80px">
+      <el-table-column label="ID" prop="id" align="center" min-width="15%">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.id }}</span>
           <!-- <span>{{ row.id }}</span> -->
         </template>
       </el-table-column>
 
-      <el-table-column label="phone" width="150px" align="center">
+      <el-table-column label="phone" min-width="15%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.phoneNumber }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="username" width="100px">
+      <el-table-column label="username" min-width="15%">
         <template slot-scope="{row}">
           <span>{{ row.username }}</span>
           <!-- <el-tag>{{ row.location }}</el-tag> -->
         </template>
       </el-table-column>
-      <el-table-column label="realName" width="100px" align="center">
+      <el-table-column label="realName" min-width="15%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.realName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="type" width="100px" align="center">
+      <el-table-column label="type" min-width="15%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.userType }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Actions" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" align="center" min-width="15%" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button v-if="row.userType!='admin'" size="mini" type="success" @click="modifyType(row,'admin')">
             设为管理
@@ -72,7 +72,7 @@
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
+      <el-form ref="dataForm" :model="temp" label-position="left" label-width="80px" style="width: 400px; margin-left:50px;">
         <el-form-item label="phone" prop="phoneNumber">
           <el-input v-model="temp.phoneNumber" :disabled="dialogStatus!='create'" />
         </el-form-item>
@@ -249,7 +249,7 @@ export default {
     handleAdd() {
       // console.log(isAdmin())
       if (!isAdmin()) return
-      // this.temp = Object.assign({}, row) // copy obj
+      this.temp = {}
       // this.temp.timestamp = new Date(this.temp.timestamp)
       this.dialogStatus = 'create'
       this.dialogFormVisible = true

@@ -103,7 +103,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'area',
         component: () => import('@/views/area/index'),
-        meta: { title: 'area', icon: 'form' }
+        meta: { title: 'area', icon: 'map' }
       }
     ]
     // hidden: true
@@ -116,7 +116,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'obstacle',
         component: () => import('@/views/obstacle/index'),
-        meta: { title: 'obstacle', icon: 'form' }
+        meta: { title: 'obstacle', icon: 'obstacle' }
       }
     ]
     // hidden: true
@@ -136,7 +136,7 @@ export const asyncRoutes = [
         path: 'index',
         name: 'user',
         component: () => import('@/views/user/index'),
-        meta: { title: 'user', icon: 'form', roles: ['admin'] }
+        meta: { title: 'user', icon: 'user', roles: ['admin'] }
       }
     ]
     // hidden: true
@@ -149,7 +149,7 @@ export const asyncRoutes = [
         path: 'index',
         name: 'dataSource',
         component: () => import('@/views/dataSource/index'),
-        meta: { title: 'dataSource', icon: 'form', roles: ['admin'] }
+        meta: { title: 'dataSource', icon: 'dataSource', roles: ['admin'] }
       }
     ]
     // hidden: true

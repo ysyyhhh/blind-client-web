@@ -2,7 +2,7 @@
   <div class="about">
     <el-popover
       ref="popverRef"
-      width="300"
+      width="400"
       placement="top-end"
       trigger="click"
       :offset="-10"
@@ -24,12 +24,12 @@
         <div style="margin-bottom:5px">未读消息 <el-tag type="danger" style="postion:fixed;right:0px">一键已读</el-tag></div>
         <div class="content_checkbox">
           <el-scrollbar>
-            <el-card v-for="(item,index) in messageList">
-              <el-row>
+            <el-card v-for="(item,index) in messageList" :key="item" :index="index">
+              <el-row @click="clickMessage(item)">
                 <el-col :span="12"><img src="item.imgPath" alt=""></el-col>
                 <el-col :span="12">
-                  <div>所属区域: {{ item.area }}</div>
-                  <div>类型: {{ item.area }}</div>
+                  <div>所属区域: {{ item.location }}</div>
+                  <div>类型: {{ item.type }}</div>
                   <div>发现时间: {{ item.discoveryTime }} </div>
                 </el-col>
               </el-row>
@@ -48,32 +48,64 @@
 </template>
 
 <script>
-import { getUnreadMessage } from '@/api/message'
+import { getUnReadMessageList } from '@/api/message'
 export default {
   name: 'Message',
   data() {
     return {
-      messageList: [1, 2, 3, 4],
+      messageList: [{
+        discoveryTime: '2023-04-02',
+        imagePath: 'image1.png',
+        isRead: false,
+        location: '北京市-北京市-海淀区-北下关街道-大柳树路',
+        obstacleId: 1,
+        type: 'Type 1',
+        userId: 5
+      }],
       messageNum: 20,
       isHidden: false,
       checkList: []
     }
   },
-  mounted() {
+  created() {
     console.log('message')
-    getUnreadMessage().then(res => {
-      this.messageList = res.data
-      this.messageNum = res.data.length
-    })
+    this.initMessageList()
   },
   methods: {
+    setMessageList(list) {
+      if (list == null) {
+        list = []
+      }
+      for (let i = 0; i < list.length; i++) {
+        const location = list[i].location
+        const lastIndex = location.lastIndexOf('-')
+        const secondIndex = location.lastIndexOf('-', lastIndex - 1)
+        list[i].location = location.substring(secondIndex + 1)
+      }
+      this.messageList = list
+      this.messageNum = list.length
+      if (this.messageNum == 0) {
+        this.isHidden = true
+      } else {
+        this.isHidden = false
+      }
+    },
+    initMessageList() {
+      console.log('hello')
+      getUnReadMessageList().then(res => {
+        console.log(res)
+        this.setMessageList(res.data)
+      })
+    },
     showPopver() {
-      this.messageNum = 0
-      this.isHidden = true
+    //   this.messageNum = 0
+    //   this.isHidden = true
+      this.initMessageList()
     },
     hidePopver() {
-      this.messageNum = 0
-      this.isHidden = true
+      this.initMessageList()
+    //   this.messageNum = 0
+    //   this.isHidden = true
     }
   }
 }

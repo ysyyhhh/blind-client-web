@@ -67,7 +67,7 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column label="ID" prop="id" align="center" width="80px">
+      <el-table-column label="ID" prop="id" align="center" min-width="5%">
         <template slot-scope="{row}">
           <router-link :to="{path: '/obstacleDetail/index', query: {obstacleId:row.id }}">
             <span>{{ row.id }}</span>
@@ -75,43 +75,43 @@
           <!-- <span>{{ row.id }}</span> -->
         </template>
       </el-table-column>
-      <el-table-column label="type" width="100px" align="center">
+      <el-table-column label="type" min-width="10%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.type }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="location" width="250px">
+      <el-table-column label="location" min-width="20%">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.location }}</span>
           <!-- <el-tag>{{ row.location }}</el-tag> -->
         </template>
       </el-table-column>
-      <el-table-column label="discoveryTime" width="100px" align="center">
+      <el-table-column label="discoveryTime" min-width="10%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.discoveryTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="image" width="80px">
+      <el-table-column label="image" min-width="10%">
         <template slot-scope="{row}">
           <img :src="row.imagePath" class="meta-item__icon">
         </template>
       </el-table-column>
-      <el-table-column label="processingTime" width="100px" align="center">
+      <el-table-column label="processingTime" min-width="10%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.processingTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="processor" width="110px" align="center">
+      <el-table-column label="processor" min-width="10%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.realName }} {{ row.processorId }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="processingStatus" width="110px" align="center">
+      <el-table-column label="processingStatus" min-width="10%" align="center">
         <template slot-scope="{row}">
           <span>{{ row.processingStatus == 1?'已处理':'未处理' }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Actions" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" align="center" min-width="15%" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button v-if="row.processingStatus!=1" size="mini" type="success" @click="handleModifyStatus(row,1)">
             处理
