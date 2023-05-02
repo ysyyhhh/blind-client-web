@@ -11,10 +11,10 @@
             </div>
             <div class="user-profile">
               <div class="box-center">
-                <pan-thumb :image="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'+'?imageView2/1/w/80/h/80'" :height="'100px'" :width="'100px'" :hoverable="false">
-                  <div />
-                  <img :src="obstacle.imgPath" alt="">
-                </pan-thumb>
+                <!-- <pan-thumb :image="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'+'?imageView2/1/w/80/h/80'" :height="'100px'" :width="'100px'" :hoverable="false">
+                   -->
+                <img :src="obstacle.imagePath" style="width:100%;height:100%">
+                <!-- </pan-thumb> -->
               </div>
               <div class="box-center">
                 <div>具体位置</div>
@@ -131,12 +131,12 @@
             </el-form>
 
           </el-card>
-          <el-card style="margin-bottom:20px;">
+          <!-- <el-card style="margin-bottom:20px;">
             <div slot="header" class="clearfix">
               <span>图像数据</span>
             </div>
 
-          </el-card>
+          </el-card> -->
         </el-col>
 
       </el-row>

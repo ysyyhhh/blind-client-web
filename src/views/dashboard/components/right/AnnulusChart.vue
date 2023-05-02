@@ -18,6 +18,10 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    pieData: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -31,12 +35,24 @@ export default {
       ]
     }
   },
+  watch: {
+    pieData(val) {
+      console.log(val)
+      console.log('pieData changed')
+      this.drawLine()
+    }
+  },
   mounted: function() {
     this.drawLine()
   },
   methods: {
     drawLine() {
       this.myChart = echarts.init(this.$el, 'macarons')
+      const legendData = []
+      for (let i = 0; i < this.pieData.length; i++) {
+        legendData.push(this.pieData[i].name)
+      }
+      console.log(legendData)
       this.myChart.setOption({
         // title: {
         //   text: '障碍物分类', // 主标题
@@ -49,7 +65,7 @@ export default {
           formatter: '{a} <br/>{b} : {d}%'
         },
         // color: ['#1FC48D', '#F5A60A', '#6DC8EC', '#3F8FFF'],
-        color: ['red', '#1FC48D', '#6DC8EC', '#3F8FFF'],
+        // color: ['red', '#1FC48D', '#6DC8EC', '#3F8FFF'],
         // backgroundColor: '#ffffff',
         legend: {
           orient: 'vertical',
@@ -57,28 +73,28 @@ export default {
           align: 'left',
           x: 'left',
           y: 'bottom',
-          data: ['校园暴力行为', '正常行为', '睡觉行为', '玩手机行为']
+          data: legendData
         },
         series: [
           {
-            name: '课堂行为',
+            name: '分类',
             type: 'pie',
             radius: ['50%', '70%'],
             avoidLabelOverlap: false,
-            center: ['60%', '50%'],
+            center: ['65%', '55%'],
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
-              },
-              color: function(params) {
-                // 自定义颜色
-                var colorList = ['red', '#1FC48D', '#6DC8EC', '#3F8FFF']
-                return colorList[params.dataIndex]
               }
+              // color: function(params) {
+              //   // 自定义颜色
+              //   var colorList = ['red', '#1FC48D', '#6DC8EC', '#3F8FFF']
+              //   return colorList[params.dataIndex]
+              // }
             },
-            data: this.opinionData2
+            data: this.pieData
           }
         ]
       })

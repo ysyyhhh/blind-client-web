@@ -149,3 +149,15 @@ export function getObstacleListByArea(area) {
     }
   })
 }
+export function getUnprocessedObstacleListByArea(area) {
+  return request({
+    url: '/service-obstacle/user/getUnprocessedObstacleListByArea',
+    method: 'post',
+    headers: {
+      'token': getToken()
+    },
+    data: {
+      'areaFullName': area
+    }
+  })
+}

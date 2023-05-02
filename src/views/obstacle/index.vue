@@ -93,7 +93,7 @@
       </el-table-column>
       <el-table-column label="image" min-width="10%">
         <template slot-scope="{row}">
-          <img :src="row.imagePath" class="meta-item__icon">
+          <img :src="row.imagePath" style="width:100%;height:100%" class="meta-item__icon">
         </template>
       </el-table-column>
       <el-table-column label="processingTime" min-width="10%" align="center">

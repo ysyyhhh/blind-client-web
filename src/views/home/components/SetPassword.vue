@@ -39,7 +39,7 @@ export default {
       console.log(this.form)
       if (this.form.newPassword !== this.form.newPasswordAgain) {
         this.$message({
-          message: 'Twice password is not the same',
+          message: '两次密码不一致',
           type: 'error',
           duration: 5 * 1000
         })
@@ -52,7 +52,7 @@ export default {
       updateUserPassword(updateForm).then(response => {
         console.log(response)
         this.$message({
-          message: 'User information has been updated successfully',
+          message: '用户密码更改成功',
           type: 'success',
           duration: 5 * 1000
         })

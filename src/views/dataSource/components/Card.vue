@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card-component" style="margin-left:8px;">
     <div slot="header" class="box-card-header" @click="edit">
-      <img src="http://localhost:9528/service-datasource/admin/image?path=1/1.jpg">
+      <img :src="'http://127.0.0.1:9000/img/' +dataSource.type+ '.png'" style="height:100%;">
     </div>
     <div style="width:100%">
       <!-- <pan-thumb :image="avatar" class="panThumb" /> -->
@@ -104,7 +104,7 @@ export default {
   // flex-direction: row;
   .box-card-header {
     position: relative;
-    height: 130px;
+    height: 220px;
     // width:50px;
     img {
       width: 100%;

@@ -26,7 +26,9 @@
           <el-scrollbar>
             <el-card v-for="(item,index) in messageList">
               <el-row>
-                <el-col :span="12"><img src="item.imgPath" alt=""></el-col>
+                <el-col :span="12"><img :src="item.imagePath" style="width:100%;height:100%">
+                  {{ item.imagePath }}
+                </el-col>
                 <el-col :span="12">
                   <div>所属区域: {{ item.area }}</div>
                   <div>类型: {{ item.area }}</div>

@@ -20,11 +20,40 @@ export default {
     height: {
       type: String,
       default: '100%'
+    },
+    weeks: {
+      type: Array,
+      default: () => []
+    },
+    processing: {
+      type: Array,
+      default: () => []
+    },
+    discovery: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
     return {
       chart: null
+    }
+  },
+  watch: {
+    weeks(val) {
+      console.log(val)
+      console.log('weeks changed')
+      this.initChart()
+    },
+    processing(val) {
+      console.log(val)
+      console.log('processing changed')
+      this.initChart()
+    },
+    discovery(val) {
+      console.log(val)
+      console.log('discovery changed')
+      this.initChart()
     }
   },
   mounted() {
@@ -67,7 +96,7 @@ export default {
           itemWidth: 14,
           itemHeight: 5,
           itemGap: 13,
-          data: ['CMCC', 'CTCC', 'CUCC'],
+          data: ['发现', '处理'],
           right: '4%',
           textStyle: {
             fontSize: 12,
@@ -89,11 +118,12 @@ export default {
               color: '#57617B'
             }
           },
-          data: ['13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35', '13:40', '13:45', '13:50', '13:55']
+          // data: ['13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35', '13:40', '13:45', '13:50', '13:55']
+          data: this.weeks
         }],
         yAxis: [{
           type: 'value',
-          name: '(%)',
+          name: '(个)',
           axisTick: {
             show: false
           },
@@ -115,7 +145,7 @@ export default {
           }
         }],
         series: [{
-          name: 'CMCC',
+          name: '发现',
           type: 'line',
           smooth: true,
           symbol: 'circle',
@@ -147,9 +177,10 @@ export default {
 
             }
           },
-          data: [220, 182, 191, 134, 150, 120, 110, 125, 145, 122, 165, 122]
+          // data: [220, 182, 191, 134, 150, 120, 110, 125, 145, 122, 165, 122]
+          data: this.discovery
         }, {
-          name: 'CTCC',
+          name: '处理',
           type: 'line',
           smooth: true,
           symbol: 'circle',
@@ -181,40 +212,8 @@ export default {
 
             }
           },
-          data: [120, 110, 125, 145, 122, 165, 122, 220, 182, 191, 134, 150]
-        }, {
-          name: 'CUCC',
-          type: 'line',
-          smooth: true,
-          symbol: 'circle',
-          symbolSize: 5,
-          showSymbol: false,
-          lineStyle: {
-            normal: {
-              width: 1
-            }
-          },
-          areaStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                offset: 0,
-                color: 'rgba(219, 50, 51, 0.3)'
-              }, {
-                offset: 0.8,
-                color: 'rgba(219, 50, 51, 0)'
-              }], false),
-              shadowColor: 'rgba(0, 0, 0, 0.1)',
-              shadowBlur: 10
-            }
-          },
-          itemStyle: {
-            normal: {
-              color: 'rgb(219,50,51)',
-              borderColor: 'rgba(219,50,51,0.2)',
-              borderWidth: 12
-            }
-          },
-          data: [220, 182, 125, 145, 122, 191, 134, 150, 120, 110, 165, 122]
+          // data: [120, 110, 125, 145, 122, 165, 122, 220, 182, 191, 134, 150]
+          data: this.processing
         }]
       })
     }

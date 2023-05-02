@@ -21,12 +21,15 @@
 
       <!-- 弹框内容 -->
       <div class="div_content">
-        <div style="margin-bottom:5px">未读消息 <el-tag type="danger" style="postion:fixed;right:0px">一键已读</el-tag></div>
+        <div style="margin-bottom:5px">未读消息
+          <!-- <el-tag type="danger" style="postion:fixed;right:0px">一键已读</el-tag> -->
+
+        </div>
         <div class="content_checkbox">
           <el-scrollbar>
-            <el-card v-for="(item,index) in messageList" :key="item" :index="index">
-              <el-row @click="clickMessage(item)">
-                <el-col :span="12"><img src="item.imgPath" alt=""></el-col>
+            <el-card v-for="(item,index) in messageList" :key="item" :index="index" @click.native="clickMessage(item)">
+              <el-row>
+                <el-col :span="12"><img :src="item.imagePath" style="width:90%;height:100%"></el-col>
                 <el-col :span="12">
                   <div>所属区域: {{ item.location }}</div>
                   <div>类型: {{ item.type }}</div>
@@ -49,8 +52,16 @@
 
 <script>
 import { getUnReadMessageList } from '@/api/message'
+
+import { readMessage } from '@/api/message'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Message',
+  computed: {
+    ...mapGetters([
+      'sidebar'
+    ])
+  },
   data() {
     return {
       messageList: [{
@@ -71,7 +82,23 @@ export default {
     console.log('message')
     this.initMessageList()
   },
+
   methods: {
+    clickMessage(item) {
+      console.log(item)
+
+      readMessage(item.obstacleId).then(res => {
+        console.log(res)
+        this.$router.push({
+          path: '/obstacleDetail/index',
+          query: {
+            obstacleId: item.obstacleId
+          }
+        })
+        this.sidebar.opened = false
+      })
+      // this.isHidden = true
+    },
     setMessageList(list) {
       if (list == null) {
         list = []

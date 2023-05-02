@@ -25,6 +25,18 @@ export default {
     height: {
       type: String,
       default: '200px'
+    },
+    xData: {
+      type: Array,
+      default: () => []
+    },
+    processedData: {
+      type: Array,
+      default: () => []
+    },
+    unprocessedData: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -42,16 +54,39 @@ export default {
     this.chart.dispose()
     this.chart = null
   },
+  watch: {
+    xData(val) {
+      console.log(val)
+      console.log('xData changed')
+      this.initChart()
+    },
+    processedData(val) {
+      console.log(val)
+      console.log('processedData changed')
+      this.initChart()
+    },
+    unprocessedData(val) {
+      console.log(val)
+      console.log('unprocessedData changed')
+      this.initChart()
+    }
+
+    // pieData(val) {
+    //   console.log(val)
+    //   console.log('pieData changed')
+    //   this.initChart()
+    // }
+  },
   methods: {
     initChart() {
       this.chart = echarts.init(document.getElementById(this.id))
-      const xData = (function() {
-        const data = []
-        for (let i = 1; i < 13; i++) {
-          data.push(i + 'month')
-        }
-        return data
-      }())
+      // const xData = (function() {
+      //   const data = []
+      //   for (let i = 1; i < 13; i++) {
+      //     data.push(i + 'month')
+      //   }
+      //   return data
+      // }())
       this.chart.setOption({
         backgroundColor: '#ffffff',
         // backgroundColor: '#344b58',
@@ -92,7 +127,7 @@ export default {
           textStyle: {
             color: '#90979c'
           },
-          data: ['female', 'male', 'average']
+          data: ['已处理', '未处理']
         },
         calculable: true,
         xAxis: [{
@@ -115,7 +150,7 @@ export default {
             interval: 0
 
           },
-          data: xData
+          data: this.xData
         }],
         yAxis: [{
           type: 'value',
@@ -164,7 +199,7 @@ export default {
           end: 35
         }],
         series: [{
-          name: 'female',
+          name: '已处理',
           type: 'bar',
           stack: 'total',
           barMaxWidth: 35,
@@ -184,24 +219,25 @@ export default {
               }
             }
           },
-          data: [
-            709,
-            1917,
-            2455,
-            2610,
-            1719,
-            1433,
-            1544,
-            3285,
-            5208,
-            3372,
-            2484,
-            4078
-          ]
+          // data: [
+          //   709,
+          //   1917,
+          //   2455,
+          //   2610,
+          //   1719,
+          //   1433,
+          //   1544,
+          //   3285,
+          //   5208,
+          //   3372,
+          //   2484,
+          //   4078
+          // ]
+          data: this.processedData
         },
 
         {
-          name: 'male',
+          name: '未处理',
           type: 'bar',
           stack: 'total',
           itemStyle: {
@@ -217,54 +253,56 @@ export default {
               }
             }
           },
-          data: [
-            327,
-            1776,
-            507,
-            1200,
-            800,
-            482,
-            204,
-            1390,
-            1001,
-            951,
-            381,
-            220
-          ]
-        }, {
-          name: 'average',
-          type: 'line',
-          stack: 'total',
-          symbolSize: 10,
-          symbol: 'circle',
-          itemStyle: {
-            normal: {
-              color: 'rgba(252,230,48,1)',
-              barBorderRadius: 0,
-              label: {
-                show: true,
-                position: 'top',
-                formatter(p) {
-                  return p.value > 0 ? p.value : ''
-                }
-              }
-            }
-          },
-          data: [
-            1036,
-            3693,
-            2962,
-            3810,
-            2519,
-            1915,
-            1748,
-            4675,
-            6209,
-            4323,
-            2865,
-            4298
-          ]
+          // data: [
+          //   327,
+          //   1776,
+          //   507,
+          //   1200,
+          //   800,
+          //   482,
+          //   204,
+          //   1390,
+          //   1001,
+          //   951,
+          //   381,
+          //   220
+          // ]
+          data: this.unprocessedData
         }
+        //  {
+        //   name: 'average',
+        //   type: 'line',
+        //   stack: 'total',
+        //   symbolSize: 10,
+        //   symbol: 'circle',
+        //   itemStyle: {
+        //     normal: {
+        //       color: 'rgba(252,230,48,1)',
+        //       barBorderRadius: 0,
+        //       label: {
+        //         show: true,
+        //         position: 'top',
+        //         formatter(p) {
+        //           return p.value > 0 ? p.value : ''
+        //         }
+        //       }
+        //     }
+        //   },
+        //   data: [
+        //     1036,
+        //     3693,
+        //     2962,
+        //     3810,
+        //     2519,
+        //     1915,
+        //     1748,
+        //     4675,
+        //     6209,
+        //     4323,
+        //     2865,
+        //     4298
+        //   ]
+        // }
         ]
       })
     }

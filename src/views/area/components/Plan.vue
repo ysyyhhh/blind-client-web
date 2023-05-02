@@ -135,7 +135,7 @@
 </style>
 <script>
 
-import { getObstacleListByArea, updateObstacleProcessingStatus } from '@/api/obstacle'
+import { getUnprocessedObstacleListByArea, updateObstacleProcessingStatus } from '@/api/obstacle'
 import { unSubscribeArea, subscribeArea, getAreaTree, getLocation, getAreaById } from '@/api/area'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
@@ -327,6 +327,8 @@ export default {
           message: '修改成功',
           type: 'success'
         })
+        if (this.infoWindow.visible) { this.infoWindow.visible = !this.infoWindow.visible }
+        this.getObstacleList()
       })
     },
     markerClick(marker) {
@@ -368,7 +370,7 @@ export default {
         this.obstacles = []
         return
       }
-      getObstacleListByArea(this.showObstacle.selectArea).then(response => {
+      getUnprocessedObstacleListByArea(this.showObstacle.selectArea).then(response => {
         // console.log(response)
 
         this.obstacles = []
@@ -377,6 +379,7 @@ export default {
         }
         this.getObstaclePage()
       })
+      // getUnprocessedObstacleListByArea
     },
     getTree() {
       getAreaTree().then(response => {

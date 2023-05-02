@@ -21,3 +21,15 @@ export function getUnReadMessageList() {
   })
 }
 
+export function readMessage(obstacle_id) {
+  return request({
+    url: '/service-subscription/user/readMessage',
+    method: 'post',
+    headers: {
+      'token': getToken()
+    },
+    data: {
+      'obstacle_id': obstacle_id
+    }
+  })
+}

@@ -21,11 +21,22 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    pieData: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
     return {
       chart: null
+    }
+  },
+  watch: {
+    pieData(val) { // message即为父组件的值，val参数为值
+      console.log(val)
+      console.log('pieData changed')
+      this.initChart()
     }
   },
   mounted() {
@@ -44,6 +55,11 @@ export default {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
 
+      const legendData = []
+      for (let i = 0; i < this.pieData.length; i++) {
+        legendData.push(this.pieData[i].name)
+      }
+      console.log(legendData)
       this.chart.setOption({
         tooltip: {
           trigger: 'item',
@@ -51,23 +67,25 @@ export default {
         },
         legend: {
           left: 'center',
-          bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          bottom: '2',
+          // data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          data: legendData
         },
         series: [
           {
-            name: 'WEEKLY WRITE ARTICLES',
+            name: 'Obstacle Type',
             type: 'pie',
             roseType: 'radius',
             radius: [15, 95],
             center: ['50%', '38%'],
-            data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
-            ],
+            data: this.pieData,
+            // data: [
+            //   { value: 320, name: 'Industries' },
+            //   { value: 240, name: 'Technology' },
+            //   { value: 149, name: 'Forex' },
+            //   { value: 100, name: 'Gold' },
+            //   { value: 59, name: 'Forecasts' }
+            // ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600
           }

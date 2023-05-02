@@ -204,8 +204,20 @@ export default {
     deleteData() {
       deleteDataSource(this.temp.id).then(res => {
         console.log(res)
-        this.dialogFormVisible = false
-        this.initDataSourceList()
+        if (res.code != 1) {
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          })
+        } else {
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+
+          this.dialogFormVisible = false
+          this.initDataSourceList()
+        }
       })
     },
     initDataSourceList() {

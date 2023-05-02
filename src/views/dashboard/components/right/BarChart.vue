@@ -23,6 +23,18 @@ export default {
     height: {
       type: String,
       default: '200px'
+    },
+    weeks: {
+      type: Array,
+      default: () => []
+    },
+    processing: {
+      type: Array,
+      default: () => []
+    },
+    discovery: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -30,12 +42,29 @@ export default {
       charts: '',
       score: '100',
       source: [
-        ['题型', '总分', '成绩'],
-        ['单选题', 45, 12],
-        ['多选题', 30, 15],
-        ['判断题', 45, 8],
-        ['填空题', 10, 2]
+        ['分类', '发现', '处理']
+        // ['单选题', 45, 12],
+        // ['多选题', 30, 15],
+        // ['判断题', 45, 8],
+        // ['填空题', 10, 2]
       ]
+    }
+  },
+  watch: {
+    weeks(val) {
+      console.log(val)
+      console.log('weeks changed')
+      this.draw()
+    },
+    processing(val) {
+      console.log(val)
+      console.log('processing changed')
+      this.draw()
+    },
+    discovery(val) {
+      console.log(val)
+      console.log('discovery changed')
+      this.draw()
     }
   },
   mounted() {
@@ -45,6 +74,17 @@ export default {
   },
   methods: {
     draw() {
+      // this.source[]
+      for (let i = 0; i < this.weeks.length; i++) {
+        const arr = []
+        arr.push(this.weeks[i])
+        arr.push(this.discovery[i])
+        arr.push(this.processing[i])
+        this.source.push(arr)
+        // this.source[i + 1][0] = this.weeks[i]
+        // this.source[i + 1][1] = this.discovery[i]
+        // this.source[i + 1][2] = this.processing[i]
+      }
       this.charts = echarts.init(this.$el, 'macarons')
       this.charts.setOption({
         legend: {},
